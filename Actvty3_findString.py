@@ -1,5 +1,5 @@
 class StringManipulator:
-    def __init__(self, text):
+    def __init__(self, text):  # used to initialize object attributes
         self.text = text
 
     def find_character(self, char):
