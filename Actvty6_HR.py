@@ -16,7 +16,7 @@ class Employee:
         print(f"New Salary: ${self.salary:,.2f}")
         print("-" * 30)
 
-
+if __name__ == "__main__":
 # --- Create at least two employees ---
 employee1 = Employee("Alice Johnson", 50000, "Software Engineer")
 employee2 = Employee("Marko Dela Torre", 60000, "Field Support Technician")
