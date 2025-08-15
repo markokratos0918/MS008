@@ -17,16 +17,19 @@ class Employee:
         print("-" * 30)
 
 if __name__ == "__main__":
-# --- Create at least two employees ---
-employee1 = Employee("Alice Johnson", 50000, "Software Engineer")
-employee2 = Employee("Marko Dela Torre", 60000, "Field Support Technician")
+    # --- Create at least two employees ---
+     employee1 = Employee("Alice Johnson", 50000, "Software Engineer")
+     employee2 = Employee("Marko Dela Torre", 60000, "Field Support Technician")
 
-# --- Display their information ---
-employee1.display_info()
-employee2.display_info()
+    # --- Display their information ---
+     employee1.display_info()
+     employee2.display_info()
 
-# --- Give a raise to employee1 ---
-employee1.give_raise(5000)
+    # --- Give a raise to employee1 ---
+     employee1.give_raise(5000)
+    # --- Give a raise to employee2 ---
+     employee2.give_raise(2000)
 
-# --- Display updated information ---
-employee1.display_info()
+    # --- Display updated information ---
+     employee1.display_info()
+     employee2.display_info()
