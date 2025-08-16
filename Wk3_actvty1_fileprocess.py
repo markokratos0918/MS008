@@ -7,14 +7,14 @@ class FileProcess:
         self.file = file
     
     def read_file(self):
-        file=open(self.file, "r")
+        file = open(self.file, "r")
         print(file)
 
     def write_file(self):
-        file=open(self.file,"a") # Opens the file in append mode
+        file = open(self.file,"a") # Opens the file in append mode
         inputted_text=input("Write the text you want to append :")
         file.write(f"{inputted_text}\n")
-        print("Congrats, your data has been added into the file")
+        print("Your new message has been added into the file")
         file.close()
 
 file = FileProcess(r"C:\Users\DTMAR\Downloads\demo.txt")
