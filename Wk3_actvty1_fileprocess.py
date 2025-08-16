@@ -7,10 +7,10 @@ class FileProcess:
         self.file_path = file_path
     
     def read_file(self):
-        file = open(self.file_path, "r", encoding="UTF-8")
+        file = open(self.file_path, "r", encoding="UTF-8") #open the file 
         data = file.read()
         file.close()
-        print(data)
+        print(data) # prints contents of the file
 
     def write_file(self):
         file = open(self.file_path,"a") # Opens the file in append mode
@@ -27,7 +27,7 @@ if __name__=="__main__":
     print("Welcome to File Processor!")
     user_option = input("Do you want to read the file or write into it? Press R if you want to read, else press W to write:  ").strip().lower()
     
-    if user_option.lower()== "r":
+    if user_option.lower()== "r":   #user is given the option to choose the method
        stored_file.read_file()
     else:
         stored_file.write_file() 
