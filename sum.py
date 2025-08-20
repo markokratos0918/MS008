@@ -1,7 +1,8 @@
 def sum_of_even_numbers(n):
     """
     Calculates the sum of all positive even numbers up to n (inclusive)
-    using a while loop and also prints each odd number.
+    using a while loop and also p5
+    rints each odd number.
     """
     i = 1
     even_sum = 0
@@ -12,6 +13,8 @@ def sum_of_even_numbers(n):
             even_numbers.append(i)
         i += 1
     return even_sum, even_numbers
+   
+   
 
 # Get input from the user
 n = int(input("Enter a positive integer: "))
