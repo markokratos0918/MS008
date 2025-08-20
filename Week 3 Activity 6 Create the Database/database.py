@@ -89,6 +89,7 @@ def create_tables():
     conn.close()
 
 # Inserting Sample Data - Optional
+create_tables()
 conn = create_connection()
 cursor = conn.cursor()
 

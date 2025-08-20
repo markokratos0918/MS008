@@ -1,5 +1,6 @@
 from database import create_tables
-from db_manager import view_table, show_enrollment_counts, admin_interface, show_main_menu
+from db_manager import view_table, show_enrollment_counts, show_main_menu
+from admin_manager import admin_interface
 def main():
     create_tables()  # ensure schema exists
 
