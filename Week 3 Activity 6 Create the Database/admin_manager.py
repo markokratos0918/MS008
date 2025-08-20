@@ -2,7 +2,7 @@ from database import create_connection
 from db_manager import show_admin_menu, view_table
 import sqlite3
 
-#---Admin Menu----#
+#---Admin Menu loop----#
 def admin_interface():
     while True:
         show_admin_menu()

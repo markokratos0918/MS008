@@ -45,4 +45,4 @@ def show_enrollment_counts():
         print(f"{course_name}: {count} students enrolled")
     conn.close()
 
-# --- Admin Menu Loop ---
+
