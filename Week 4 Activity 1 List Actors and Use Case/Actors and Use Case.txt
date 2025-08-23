@@ -1,0 +1,33 @@
+Scope: A database that tracks course enrollments and allows access for students, lecturers, and admins. This database will track the number of enrollees per course. It will allow students and lecturers to access relevant data. Lastly, this database will enable admin users to manage all data. 
+
+Actors
+------------
+
+Student
+Lecturer
+Admin 
+
+
+Student
+--> view list of students
+--> view list of subjects
+--> view list of lecturers
+--> view list of number of enrollments per course
+--> view list of fees per student and their status
+--> view list of admins for requests to change, add, or delete a record
+--> view list of courses
+
+
+
+Admin
+--> add, update, delete information for all tables
+--> view all from each table
+
+Lecturer
+--> view list of students
+--> view list of subjects
+--> view list of lecturers
+--> view list of number of enrollments per course
+--> view list of fees per student and their status
+--> view list of admins for requests to change, add, or delete a record
+--> view list of courses
