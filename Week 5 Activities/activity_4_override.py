@@ -29,7 +29,6 @@ class Student(Person):
     def greetings(self):
          print(f"Hello my name is {self.name} and I am a student")
 
-
 if __name__ == "__main__":
     
     #parent = Person("Marko", "39A Winstone Road", "marko@gmail.com")
