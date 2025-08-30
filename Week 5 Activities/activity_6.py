@@ -1,3 +1,5 @@
+#Ans. the use of __name & __species and get and setter will identify encapsulation. The methods could not accessed publicly within the class.
+
 class Animal:
     def __init__(self, name, species):
         self.__name = name       # private attribute
@@ -50,4 +52,3 @@ if __name__ == "__main__":
     # Trying invalid update
     lion.set_name("")   # This should print an error
 
-#Ans. the use of __name & __species and get and setter will identify encapsulation. The methods could not accessed publicly within the class.
