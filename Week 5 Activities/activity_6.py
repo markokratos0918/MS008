@@ -1,4 +1,5 @@
 #Ans. the use of __name & __species and get and setter will identify encapsulation. The methods could not accessed publicly within the class.
+#Used to bundling attributes and methods in a class
 
 class Animal:
     def __init__(self, name, species):
