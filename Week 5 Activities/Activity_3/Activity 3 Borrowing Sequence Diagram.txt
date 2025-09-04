@@ -1,0 +1,12 @@
+Week 5 Library Sequence Diagram
+
+Member requests a book from the library system
+The library system will check the availability from the Book class
+The Book class will inform the library system if it's available
+The library system will validate the members information
+The library system will check the number of issued book to the Member
+The library system will issue the book to the Member
+The library system will log this to the borrowing records class
+The library system will save the member and book details borrowing records class
+The library system will update the status of the Book(available, not available)
+The library system will update the Member record

@@ -1,0 +1,17 @@
+Activity 3 Use Case Diagram
+
+Member
+
+--> Login to the system
+--> borrow books
+--> Return a book
+--> Renew a borrowed book
+--> Pay Fines (if overdue)
+
+
+
+Database
+--> the system will track copies of each book
+--> track books borrowed by each member
+--> keeps track of all books in the library
+--> calculate the overdue fines for each member

@@ -9,11 +9,10 @@ Admin
 
 
 Student
---> view list of students
+--> view list of courses he/she enrolled in
 --> view list of subjects
 --> view list of lecturers
---> view list of number of enrollments per course
---> view list of fees per student and their status
+--> view student's fees status if paid or not
 --> view list of admins for requests to change, add, or delete a record
 --> view list of courses
 
@@ -22,6 +21,7 @@ Student
 Admin
 --> add, update, delete information for all tables
 --> view all from each table
+--> view fees table, if unpaid, 
 
 Lecturer
 --> view list of students
@@ -31,3 +31,9 @@ Lecturer
 --> view list of fees per student and their status
 --> view list of admins for requests to change, add, or delete a record
 --> view list of courses
+
+
+todo W4
+Use Case diagram
+Activity diagram
+Class diagram

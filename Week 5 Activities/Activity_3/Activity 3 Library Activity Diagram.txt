@@ -1,0 +1,16 @@
+Activity 3 Library Activity Diagram
+
+The diagram starts with the member returning the book. Simultaneously, the system will access the member's record and the book record:
+
+Book Record
+--> The system will flag the book quantity by 1
+--> The system will flag the book as available
+--> the process will end 
+
+Member Record
+--> Check if the book returned is overdue
+--> If not overdue, the system will flag the book as returned
+--> If overdue, the system will calculate the fine and notify the member
+--> If the fine is not paid, the system will suspend member
+--> If the fine is paid, the system will flag the book as returned
+--> the process will end 

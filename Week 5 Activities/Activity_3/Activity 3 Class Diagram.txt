@@ -1,0 +1,74 @@
+Activity 3 LibraryClass Diagram
+
+Book Class
+
+Description: Represents a single book in the library's collection.
+
+Attributes:
+
+book_id: integer
+
+title: string
+
+author: string
+
+ISBN: string
+
+genre: string
+
+publish_date: date
+
+total_copies: integer
+
+avail_copies: integer
+
+Methods:
+
+borrowBook(): decrements avail_copies
+
+returnBook(): increments avail_copies
+
+Member Class
+
+Description: Represents a person registered with the library.
+
+Attributes:
+
+member_id: string
+
+name: string
+
+contact_details: string
+
+membership_exp: date
+
+Methods:
+
+login()
+borro_limit()
+
+Borrowing_record
+
+Description: An association class that tracks a specific borrowing transaction between a member and a book.
+
+borrowing_id: integer
+
+borrowDate: Date
+
+dueDate: Date
+
+returnDate: Date
+
+Methods:
+
+calculate_fine()
+
+Relationships
+
+A Member can be associated with many BorrowingRecords.
+
+A Book can be associated with many BorrowingRecords.
+
+The BorrowingRecord class represents a many-to-many relationship between Member and Book.
+
+A Book is associated with one Genre, and a Genre can be associated with many Books.
