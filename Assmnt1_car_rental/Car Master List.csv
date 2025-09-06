@@ -1,0 +1,14 @@
+Car Master Table,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+car_id,brand,model,plate,color,seat,price_per_hour,price_per_day,booked_yn,date_rented_st,date_rented_end,car_return_yn
+1,Toyota,Chr,AAZ6667,Red,5,250,2500,Y,9/1/2025,31/07/2025,Y
+2,Suzuki,Swift,BDC5546,White,5,150,1500,N,DD/MM/YY,DD/MM/YY,N
+3,Mitsubishi,Montero,AAZ6666,Blue,7,300,3000,Y,5/9/2025,15/9/2025,N
+4,Ford,Ranger,ASD5487,Black,4,200,2500,N,DD/MM/YY,DD/MM/YY,N
+5,Nissan,Navara,PLD6659,Red,4,200,2500,Y,9/8/2025,25/08/2025,Y
+6,Toyota,Fortuner,TTY6698,Green,7,300,3000,Y,DD/MM/YY,DD/MM/YY,N
+7,Chevrolet,Colorado,PPQ5598,Gray,4,200,2500,Y,5/7/2025,14/7/2025,Y
+8,Toyota,Vios,TTM9875,Red,5,150,1500,N,DD/MM/YY,DD/MM/YY,N
+9,Honda,Civic,PPQ9987,White,5,180,1800,N,DD/MM/YY,DD/MM/YY,N
+10,Honda,Odyssey,PHN8852,Blue,7,250,2500,Y,6/9/2025,15/09/2025,N
