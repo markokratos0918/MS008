@@ -191,3 +191,150 @@ class App:
                 break
             else:
                 print("Invalid choice.")
+    
+    def manage_users(self):
+        if not self._admin_only():
+            return
+        while True:
+            print(
+                """
+=== User Management (Admin) ===
+1. List users
+2. Add user
+3. Update role
+4. Delete user
+5. Back
+"""
+            )
+            c = input("Choice: ").strip()
+            if c == "1":
+                for u in self.user_repo.list_users():
+                    print(f"[{u['id']}] {u['first_name']} — {u['email']} ({u['role']})")
+            elif c == "2":
+                first = input("First: ").strip()
+                last = input("Last: ").strip()
+                email = input("Email: ").strip()
+                phone = input("Phone: ").strip()
+                pw = input("Password: ").strip()
+                role = input("Role (admin/customer): ").strip()
+                if role not in ("admin", "customer") or not all([first, last, email, phone, pw]):
+                    print("Invalid values.")
+                    continue
+                try:
+                    self.user_repo.add_user(first, last, email, phone, pw, role)
+                    print("User added.")
+                except Exception as e:
+                    print(f"Add failed: {e}")
+            elif c == "3":
+                try:
+                    uid = int(input("User ID: "))
+                    role = input("New role (admin/customer): ").strip()
+                except ValueError:
+                    print("Invalid input.")
+                    continue
+                if role not in ("admin", "customer"):
+                    print("Invalid input.")
+                    continue
+                print("Updated." if self.user_repo.update_role(uid, role) else "No update (check ID).")
+            elif c == "4":
+                try:
+                    uid = int(input("User ID: "))
+                except ValueError:
+                    print("Invalid ID.")
+                    continue
+                print("Deleted." if self.user_repo.delete(uid) else "No delete (check ID).")
+            elif c == "5":
+                break
+            else:
+                print("Invalid choice.")
+    
+     # -------- Menus --------
+    def _admin_only(self) -> bool:
+        if not self.current_user:
+            print("Login first.")
+            return False
+        if not self.current_user.is_admin():
+            print("Admin privileges required.")
+            return False
+        return True
+    
+    def _main_menu(self):
+        while self.current_user is None:
+            print("\n1. Login\n2. Register\n3. Exit")
+            ch = input("Choice: ").strip()
+            if ch == "1":
+                self.current_user = self.auth.login()
+            elif ch == "2":
+                self.auth.register()
+            elif ch == "3":
+                raise SystemExit
+            else:
+                print("Invalid choice.")
+    
+    def _customer_menu(self):
+        while self.current_user and not self.current_user.is_admin():
+            print(
+                """
+=== Customer Menu ===
+1. View available cars
+2. Make booking
+3. My rentals
+4. Return rental
+5. Logout
+"""
+            )
+            ch = input("Choice: ").strip()
+            if ch == "1":
+                self.view_cars()
+            elif ch == "2":
+                self.make_booking()
+            elif ch == "3":
+                self.my_rentals()
+            elif ch == "4":
+                self.return_rental()
+            elif ch == "5":
+                self.current_user = None
+            else:
+                print("Invalid choice.")
+    def _admin_menu(self):
+        while self.current_user and self.current_user.is_admin():
+            print(
+                """
+=== Admin Menu ===
+1. Car management
+2. User management
+3. View all rentals
+4. Approve/Reject rental
+5. Logout
+"""
+            )
+            ch = input("Choice: ").strip()
+            if ch == "1":
+                self.manage_cars()
+            elif ch == "2":
+                self.manage_users()
+            elif ch == "3":
+                self.list_all_rentals()
+            elif ch == "4":
+                self.approve_reject()
+            elif ch == "5":
+                self.current_user = None
+            else:
+                print("Invalid choice.")
+    
+    def run(self):
+        print("=== DelTor Car Inc. — CLI ===")
+        while True:
+            self._main_menu()
+            if self.current_user and self.current_user.is_admin():
+                self._admin_menu()
+            elif self.current_user:
+                self._customer_menu()
+
+
+def main():
+    App().run()
+
+
+if __name__ == "__main__":
+    main()
