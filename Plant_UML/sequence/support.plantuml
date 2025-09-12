@@ -1,0 +1,36 @@
+@startuml
+title Support Modules
+
+package "Support" {
+  class Validators {
+    {static} + ensure_non_empty(...): void
+    {static} + ensure_positive_int(label:str, value:int): void
+    {static} + ensure_non_negative(label:str, value:num): void
+    {static} + validate_rental_window(start:date, end:date, min_days:int, max_days:int): int
+  }
+
+  class Utils {
+    {static} + hash_password(pw:str): str
+    {static} + parse_date(s:str): date
+    {static} + today(): date
+    {static} + format_date(d:date): str
+  }
+
+  class Errors {
+    ..exceptions..
+    AppError
+    ValidationError
+    AuthError
+    NotFoundError
+    PermissionError
+    InsufficientStockError
+  }
+
+  class Config {
+    {static} + DB_NAME: str
+    {static} + SEED_ON_BOOT: bool
+    {static} + DATE_FMT: str
+    {static} + DATETIME_FMT: str
+  }
+}
+@enduml

@@ -1,0 +1,102 @@
+@startuml
+title CarRentalMSE800 – Class Diagram
+
+interface IUserRepo
+interface ICarRepo
+interface IBookingRepo
+
+class UserRepo
+class CarRepo
+class BookingRepo
+
+class AuthService
+class CarService
+class BookingService
+
+abstract class PricingStrategy {
+  +quote(daily: float, start: str, end: str): float
+}
+class FlatDaily
+class WeekendSurcharge {
+  -factor: float
+  +quote(...): float
+}
+
+class EventBus {
+  +subscribe(event: str, handler)
+  +emit(event: str, payload)
+}
+class Database {
+  +connect(): Connection
+  +init_schema(): void
+}
+
+class User {
+  id: int
+  first_name: str
+  last_name: str
+  email: str
+  phone: str
+  password: str
+  role: str  // 'admin' | 'customer'
+}
+class Car {
+  id: int
+  brand: str
+  model: str
+  color: str
+  year: int
+  mileage: int
+  available_now: int
+  min_rent_days: int
+  max_rent_days: int
+  price_per_day: float
+}
+class Booking {
+  id: int
+  user_id: int
+  car_id: int
+  start_date: str
+  end_date: str
+  total_price: float
+  status: str  // pending|approved|rejected|returned
+  notes: str
+}
+
+class App {
+  -current_user
+  +parser
+  +cmd_login(...)
+  +cmd_register(...)
+  +cmd_list_cars(...)
+  +cmd_request(...)
+  +cmd_pending(...)
+  +cmd_approve(...)
+  +cmd_reject(...)
+  +cmd_return(...)
+  +cmd_import_cars(...)
+}
+
+IUserRepo <|.. UserRepo
+ICarRepo <|.. CarRepo
+IBookingRepo <|.. BookingRepo
+
+AuthService --> IUserRepo
+CarService --> ICarRepo
+BookingService --> IBookingRepo
+BookingService --> ICarRepo
+BookingService --> PricingStrategy
+
+PricingStrategy <|-- FlatDaily
+PricingStrategy <|-- WeekendSurcharge
+
+EventBus ..> BookingService : emits\n(requested/approved/\nrejected/returned)
+Database ..> UserRepo
+Database ..> CarRepo
+Database ..> BookingRepo
+
+App --> AuthService
+App --> CarService
+App --> BookingService
+
+@enduml

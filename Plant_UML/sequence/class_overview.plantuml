@@ -1,0 +1,49 @@
+@startuml
+title DelTor Car Inc. – High-Level Architecture
+
+package "CLI (UI)" as UI {
+  class App
+}
+
+package "Services" as SVC {
+  class AuthService
+  class BookingService
+  class AdminService
+  class FeeCalculator
+}
+
+package "Repositories" as REPO {
+  class UserRepo
+  class CarRepo
+  class RentalRepo
+}
+
+package "Database" as DB {
+  class Database
+}
+
+package "Domain Models" as DOMAIN {
+  class User
+  class Car
+}
+
+UI.App --> SVC.AuthService
+UI.App --> SVC.BookingService
+UI.App --> SVC.AdminService
+
+SVC.AuthService --> REPO.UserRepo
+SVC.BookingService --> REPO.RentalRepo
+SVC.AdminService --> REPO.UserRepo
+SVC.AdminService --> REPO.CarRepo
+SVC.AdminService --> REPO.RentalRepo
+SVC.BookingService ..> SVC.FeeCalculator
+
+REPO.UserRepo --> DB.Database
+REPO.CarRepo  --> DB.Database
+REPO.RentalRepo --> DB.Database
+
+REPO.UserRepo ..> DOMAIN.User
+REPO.CarRepo  ..> DOMAIN.Car
+UI.App ..> DOMAIN.User
+UI.App ..> DOMAIN.Car
+@enduml

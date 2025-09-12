@@ -1,0 +1,80 @@
+@startuml
+title Services, Repositories & DB (Details)
+
+package "Services" as SVC {
+  class AuthService {
+    - users: UserRepo
+    + register(): bool
+    + login(): User
+  }
+
+  class BookingService {
+    - db: Database
+    - rentals: RentalRepo
+    + create_booking(user_id:int, car_id:int, start:date, end:date, extras:float=0.0): int
+  }
+
+  class AdminService {
+    - users: UserRepo
+    - cars: CarRepo
+    - rentals: RentalRepo
+    + add_car(...): bool
+    + approve(rental_id:int): bool
+    + reject(rental_id:int): bool
+  }
+
+  class FeeCalculator {
+    {static} + calc(days:int, daily_rate:float, extras:float=0.0): (float,float,float)
+  }
+}
+
+package "Repositories" as REPO {
+  class UserRepo {
+    - db: Database
+    + create_customer(...): void
+    + add_user(...): void
+    + login(email:str, password:str): User
+    + list_users(): Row[]
+    + update_role(user_id:int, role:str): bool
+    + delete(user_id:int): bool
+  }
+
+  class CarRepo {
+    - db: Database
+    + all(): Car[]
+    + available(): Car[]
+    + add(...): void
+    + update_field(car_id:int, field:str, value:any): bool
+    + delete(car_id:int): bool
+  }
+
+  class RentalRepo {
+    - db: Database
+    + create(..., status:str="pending"): int
+    + list_for_user(user_id:int): Row[]
+    + list_all(): Row[]
+    + approve(rental_id:int): bool
+    + reject(rental_id:int): bool
+    + return_rental(rental_id:int, for_user_id:int=NULL): bool
+  }
+}
+
+package "Database" as DB {
+  class Database {
+    - db_name: str
+    + connect(): Connection
+    - _init_db(): void
+    - _seed(): void
+  }
+}
+
+SVC.AuthService --> REPO.UserRepo
+SVC.BookingService --> REPO.RentalRepo
+SVC.AdminService --> REPO.UserRepo
+SVC.AdminService --> REPO.CarRepo
+SVC.AdminService --> REPO.RentalRepo
+SVC.BookingService ..> SVC.FeeCalculator
+REPO.UserRepo --> DB.Database
+REPO.CarRepo  --> DB.Database
+REPO.RentalRepo --> DB.Database
+@enduml

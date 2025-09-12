@@ -1,0 +1,19 @@
+@startuml
+title Booking Flow (Customer creates a booking)
+
+actor Customer
+participant "App (CLI)" as App
+participant "BookingService" as BS
+participant "RentalRepo" as RR
+database "Database" as DB
+
+Customer -> App: Make booking (car, start, end, extras)
+App -> BS: create_booking(user_id, car_id, start, end, extras)
+BS -> DB: query car (rate, min_days, max_days)
+BS -> BS: validate window & calc fee
+BS -> RR: create(...)
+RR -> DB: INSERT rental (pending)
+RR --> BS: rental_id
+BS --> App: rental_id
+App --> Customer: "Booking #<id> created (pending)"
+@enduml

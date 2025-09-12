@@ -1,0 +1,197 @@
+@startuml
+title DelTor Car Inc. – Car Rental System (Class Diagram)
+
+skinparam packageStyle rectangle
+skinparam ArrowColor #666
+skinparam ClassFontStyle Plain
+skinparam ClassAttributeIconSize 0
+
+' ================== Packages (layers) ==================
+package "CLI (UI)" as UI {
+  class App {
+    - db: Database
+    - user_repo: UserRepo
+    - car_repo: CarRepo
+    - rental_repo: RentalRepo
+    - auth: AuthService
+    - booking: BookingService
+    - admin_svc: AdminService
+    - current_user: User
+    --
+    + run(): void
+    - _main_menu(): void
+    - _customer_menu(): void
+    - _admin_menu(): void
+    + view_cars(): void
+    + make_booking(): void
+    + my_rentals(): void
+    + return_rental(): void
+    + manage_cars(): void
+    + manage_users(): void
+  }
+}
+
+package "Services" as SVC {
+  class AuthService {
+    - users: UserRepo
+    + register(): bool
+    + login(): User
+  }
+
+  class BookingService {
+    - db: Database
+    - rentals: RentalRepo
+    + create_booking(user_id:int, car_id:int, start:date, end:date, extras:float=0.0): int
+  }
+
+  class AdminService {
+    - users: UserRepo
+    - cars: CarRepo
+    - rentals: RentalRepo
+    + add_car(make:str, model:str, color:str, year:int, mileage:int, rate:float, stock:int, min_days:int, max_days:int): bool
+    + approve(rental_id:int): bool
+    + reject(rental_id:int): bool
+  }
+
+  class FeeCalculator {
+    {static} + calc(days:int, daily_rate:float, extras:float=0.0): (float,float,float)
+  }
+}
+
+package "Repositories" as REPO {
+  class UserRepo {
+    - db: Database
+    + create_customer(first:str, last:str, email:str, phone:str, password:str): void
+    + add_user(first:str, last:str, email:str, phone:str, password:str, role:str): void
+    + login(email:str, password:str): User
+    + list_users(): Row[]
+    + update_role(user_id:int, role:str): bool
+    + delete(user_id:int): bool
+  }
+
+  class CarRepo {
+    - db: Database
+    + all(): Car[]
+    + available(): Car[]
+    + add(make:str, model:str, color:str, year:int, mileage:int, daily_rate:float, available_now:int, min_days:int, max_days:int): void
+    + update_field(car_id:int, field:str, value:any): bool
+    + delete(car_id:int): bool
+  }
+
+  class RentalRepo {
+    - db: Database
+    + create(user_id:int, car_id:int, start:date, end:date, days:int, base:float, extras:float, total:float, status:str="pending"): int
+    + list_for_user(user_id:int): Row[]
+    + list_all(): Row[]
+    + approve(rental_id:int): bool
+    + reject(rental_id:int): bool
+    + return_rental(rental_id:int, for_user_id:int=NULL): bool
+  }
+}
+
+package "Database" as DB {
+  class Database {
+    - db_name: str
+    + connect(): Connection
+    - _init_db(): void
+    - _seed(): void
+  }
+}
+
+package "Domain Models" as DOMAIN {
+  class User {
+    + id: int
+    + first_name: str
+    + role: str  <<admin|customer>>
+    + is_admin(): bool
+  }
+
+  class Car {
+    + id: int
+    + make: str
+    + model: str
+    + color: str
+    + year: int
+    + mileage: int
+    + daily_rate: float
+    + available_now: int
+    + min_days: int
+    + max_days: int
+  }
+}
+
+package "Support" as SUP {
+  class Validators {
+    {static} + ensure_non_empty(...): void
+    {static} + ensure_positive_int(label:str, value:int): void
+    {static} + ensure_non_negative(label:str, value:num): void
+    {static} + validate_rental_window(start:date, end:date, min_days:int, max_days:int): int
+  }
+
+  class Utils {
+    {static} + hash_password(pw:str): str
+    {static} + parse_date(s:str): date
+    {static} + today(): date
+    {static} + format_date(d:date): str
+  }
+
+  class Errors {
+    ..exceptions..
+    AppError
+    ValidationError
+    AuthError
+    NotFoundError
+    PermissionError
+    InsufficientStockError
+  }
+
+  class Config {
+    {static} + DB_NAME: str
+    {static} + SEED_ON_BOOT: bool
+    {static} + DATE_FMT: str
+    {static} + DATETIME_FMT: str
+  }
+}
+
+' ================== Relationships ==================
+UI.App --> SVC.AuthService
+UI.App --> SVC.BookingService
+UI.App --> SVC.AdminService
+UI.App --> REPO.UserRepo
+UI.App --> REPO.CarRepo
+UI.App --> REPO.RentalRepo
+UI.App --> DB.Database
+
+SVC.AuthService --> REPO.UserRepo
+SVC.BookingService --> REPO.RentalRepo
+SVC.BookingService --> DB.Database
+SVC.AdminService --> REPO.UserRepo
+SVC.AdminService --> REPO.CarRepo
+SVC.AdminService --> REPO.RentalRepo
+SVC.BookingService ..> SVC.FeeCalculator : uses
+
+REPO.UserRepo --> DB.Database
+REPO.CarRepo --> DB.Database
+REPO.RentalRepo --> DB.Database
+
+REPO.UserRepo ..> DOMAIN.User
+REPO.CarRepo ..> DOMAIN.Car
+SVC.AuthService ..> DOMAIN.User
+UI.App ..> DOMAIN.User
+UI.App ..> DOMAIN.Car
+
+SVC.AuthService ..> SUP.Validators
+SVC.AuthService ..> SUP.Errors
+SVC.BookingService ..> SUP.Validators
+SVC.BookingService ..> SUP.Errors
+SVC.BookingService ..> SUP.Utils
+SVC.AdminService ..> SUP.Validators
+SVC.AdminService ..> SUP.Errors
+
+REPO.UserRepo ..> SUP.Errors
+REPO.CarRepo ..> SUP.Errors
+REPO.RentalRepo ..> SUP.Errors
+
+UI.App ..> SUP.Errors
+
+@enduml
