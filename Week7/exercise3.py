@@ -1,6 +1,7 @@
 class Circle:
     def draw(self):
         return "Drawing a Circle"
+    
 
 class Square:
     def draw(self):
@@ -22,9 +23,10 @@ class ShapeFactory:
 
 
 factory = ShapeFactory()
-shape = factory.create_shape("triangle")   
+#shape = factory.create_shape("triangle")   
+shape = factory.create_shape("circle") 
 print(shape.draw())  
 
 #Ans. 
-# The code becomes tightly coupled to specific classes. If you need to change the implementation or constructor of a class, you must update every place where it is instantiated.
+#The problem possible will majhe the Object creation logic is repeated throughout the codebase, making maintenance harder. and increasing the risk of inconsistencis.
 # Using a Factory centralizes object creation, making your code more maintainable, flexible, and easier to test.
