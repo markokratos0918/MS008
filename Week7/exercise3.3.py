@@ -18,7 +18,9 @@ class Square(Shape):
     def draw(self) -> str:
         return "Drawing a Square"
     
-
+class Triangle(Shape):
+    def draw(self):
+        return "Drawing a Triangle"
 
 
 # 3) Factory
@@ -26,7 +28,7 @@ class ShapeFactory:
     _registry = {
         "circle": Circle,
         "square": Square,
-        
+        "triangle": Triangle,
 
     }
 
@@ -55,7 +57,10 @@ if __name__ == "__main__":
 
     square = factory.create("square")
     print(square.draw())  
+    
+    square = factory.create("triangle")
+    print(square.draw())  
 
-
+    
 
     #ANS. Using a Factory centralizes object creation, making your code more maintainable, flexible, and easier to test.
