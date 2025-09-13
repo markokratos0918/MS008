@@ -51,3 +51,5 @@ if __name__ == "__main__":
 
     square = factory.create("square")
     print(square.draw())  
+
+    #ANS. Using a Factory centralizes object creation, making your code more maintainable, flexible, and easier to test.
