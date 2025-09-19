@@ -36,8 +36,7 @@ class AuthService:
 
     def login(self):
         print("\n=== Login ===")
-        email = input("Email: ").strip()
-        password = input("Password: ").strip()
+        email = input("Email: ").strip(); password = input("Password: ").strip()
         user = self.users.login(email, password)
         print("Invalid credentials." if not user else f"Welcome {user.first_name}! ({user.role})")
         return user

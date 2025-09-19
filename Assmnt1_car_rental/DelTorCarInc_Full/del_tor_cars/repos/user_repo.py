@@ -1,32 +1,39 @@
+from __future__ import annotations
 from typing import Optional, Iterable
-from ..models import User
-from ..utils import hash_password
+from del_tor_cars.models import User
+from del_tor_cars.hashing import HashingFactory, HashingStrategy
 
 class UserRepo:
-    def __init__(self, db):
+    def __init__(self, db, hasher: HashingStrategy | None = None):
         self.db = db
+        self.hasher = hasher or HashingFactory.get()
 
     def create_customer(self, first, last, email, phone, password):
         with self.db.connect() as conn:
             conn.execute(
                 "INSERT INTO users(first_name,last_name,email,phone,password,role) VALUES(?,?,?,?,?,?)",
-                (first, last, email, phone, hash_password(password), "customer"),
+                (first, last, email, phone, self.hasher.hash(password), "customer"),
             )
+
     def add_user(self, first, last, email, phone, password, role):
         assert role in ("admin", "customer")
         with self.db.connect() as conn:
             conn.execute(
                 "INSERT INTO users(first_name,last_name,email,phone,password,role) VALUES(?,?,?,?,?,?)",
-                (first, last, email, phone, hash_password(password), role),
+                (first, last, email, phone, self.hasher.hash(password), role),
             )
+
     def login(self, email: str, password: str) -> Optional[User]:
         with self.db.connect() as conn:
-            cur = conn.execute(
-                "SELECT id, first_name, role FROM users WHERE email=? AND password=?",
-                (email, hash_password(password)),
-            )
-            row = cur.fetchone()
-            return User(row[0], row[1], row[2]) if row else None
+            row = conn.execute(
+                "SELECT id, first_name, role, password FROM users WHERE email=?", (email,)
+            ).fetchone()
+        if not row:
+            return None
+        if not self.hasher.verify(password, row["password"]):
+            return None
+        return User(row["id"], row["first_name"], row["role"])
+
     def list_users(self) -> Iterable:
         with self.db.connect() as conn:
             return list(conn.execute("SELECT id, first_name, last_name, email, role FROM users ORDER BY id"))

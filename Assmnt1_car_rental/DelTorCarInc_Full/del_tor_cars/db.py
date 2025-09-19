@@ -1,6 +1,6 @@
 from __future__ import annotations
 import sqlite3
-from .config import DB_NAME, DATETIME_FMT, SEED_ON_BOOT
+from .config import DB_NAME, SEED_ON_BOOT
 from .utils import hash_password
 
 
