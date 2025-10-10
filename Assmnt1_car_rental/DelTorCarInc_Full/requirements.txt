@@ -1,0 +1,4 @@
+# create empty file
+type nul > requirements.txt
+pyinstaller
+

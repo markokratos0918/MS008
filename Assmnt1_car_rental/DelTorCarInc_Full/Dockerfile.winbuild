@@ -1,0 +1,8 @@
+# Use Wine + Python to cross-build a Windows .exe
+FROM cdrx/pyinstaller-linux-windows:python3
+
+WORKDIR /src
+COPY . /src
+
+# Build your one-file Windows executable
+RUN pyinstaller --onefile --name DelTorCarInc run.py
