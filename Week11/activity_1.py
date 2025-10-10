@@ -17,7 +17,9 @@ def divide(x, y):
     if y == 0:
         raise ValueError("Cannot divide by zero")
     return x / y
+
 class TestMathOperations(unittest.TestCase):
+    '''Unit tests for math operations'''
     def test_add(self):
         '''Test addition'''
         self.assertEqual(add(2, 3), 5)
@@ -38,4 +40,4 @@ class TestMathOperations(unittest.TestCase):
             divide(5, 0)
 
 if __name__ == '__main__':
-      unittest.main()
+    unittest.main()
