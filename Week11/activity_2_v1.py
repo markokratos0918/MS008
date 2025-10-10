@@ -23,15 +23,6 @@ class ExpenseTracker:
         return sum(expense.amount for expense in self.expenses)
 
 
-if __name__ == "__main__":
-    tracker = ExpenseTracker()
-    tracker.add_expense("Lunch", 12.50)
-    tracker.add_expense("Book", 25.00)
-    tracker.add_expense("Rental", 100.00)
-    print("Total Expense:", tracker.total_expense())  # Output: Total Expense: 137.5
-
-
-
 class ExpenseTrackerTest:
     '''Class to track personal expenses.'''
     def __init__(self):
@@ -71,4 +62,9 @@ class TestExpenseTracker(unittest.TestCase):
             self.tracker.add_expense("Invalid", -5.00)
 
 if __name__ == '__main__':
+    tracker = ExpenseTracker()
+    tracker.add_expense("Lunch", 12.50)
+    tracker.add_expense("Book", 25.00)
+    tracker.add_expense("Rental", 100.00)
+    print("Total Expense:", tracker.total_expense())  # Output: Total Expense: 137.5
     unittest.main()
