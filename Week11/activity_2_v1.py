@@ -68,5 +68,4 @@ if __name__ == '__main__':
     tracker.add_expense("Rental", 100.00)
     print("Total Expense:", tracker.total_expense())  # Output: Total Expense: 137.5
     unittest.main()
-
     
