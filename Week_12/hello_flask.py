@@ -8,3 +8,7 @@ def hello_flask():
 @app.route("/marko")
 def marko():
     return ("<h2>'Marko is Flask!'</<h2>")
+
+@app.route('/cal/<int:number>')
+def show_square(number):
+    return f"The square of {number} is {number**2}"
