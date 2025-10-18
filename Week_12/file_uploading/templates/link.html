@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<title>Image Uploaded</title>
+<h1>Image Uploaded Successfully</h1>
+<a href="{{ url_for('uploaded_file', filename=filename) }}" target="_blank">
+  <img
+    src="{{ url_for('static', filename='uploads/' + filename) }}"
+    alt="Uploaded Image"
+    width="300"
+  />
+  <br />
+  Click here to view full image
+</a>

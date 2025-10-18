@@ -1,0 +1,103 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #2D7FF9 0%, #45594E 100%);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 430px;
+    margin: 50px auto;
+    padding: 28px 32px;
+    background: rgba(255,255,255,0.97);
+    border-radius: 18px;
+    box-shadow: 0 6px 36px 0 rgba(20,60,100,0.18);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.container:hover {
+    box-shadow: 0 10px 40px 0 rgba(20,60,100,0.23);
+}
+
+h2 {
+    text-align: center;
+    color: #BF472C;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    font-weight: 720;
+    font-size: 2em;
+    text-shadow: 1px 2px 6px #cbefff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+label {
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 7px;
+}
+
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #66c7f9;
+    border-radius: 9px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="number"]:focus {
+    border-color: #23D7D0;
+}
+
+select {
+    padding: 9px;
+    border: 1.5px solid #9DEDF3;
+    border-radius: 9px;
+    font-size: 1em;
+    background-color: #e2f7fb;
+    color: #198ad1;
+    transition: border-color 0.2s;
+}
+
+select:focus {
+    border-color: #23D7D0;
+}
+
+input[type="submit"] {
+    background: linear-gradient(90deg, #2D7FF9 40%, #23D7D0 100%);
+    color: #fff;
+    padding: 12px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 16px rgba(45,127,249,0.15);
+    cursor: pointer;
+    margin-top: 12px;
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 22px rgba(45,127,249,0.24);
+    background: linear-gradient(90deg, #198ad1 40%, #23D7D0 100%);
+}
+
+h3 {
+    text-align: center;
+    color: #23D7D0;
+    font-weight: 680;
+    background: #f2fffa;
+    padding: 13px 0;
+    margin-top: 24px;
+    border-radius: 7px;
+    letter-spacing: 0.7px;
+    box-shadow: 0 2px 10px rgba(35,215,208,0.10);
+    font-size: 1.32em;
+}
