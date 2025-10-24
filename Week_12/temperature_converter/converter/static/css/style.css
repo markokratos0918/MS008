@@ -1,0 +1,157 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.container {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.20);
+    padding: 30px 38px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transition: box-shadow 0.18s;
+}
+.container:hover {
+    box-shadow: 0 12px 48px rgba(0,0,0,0.23);
+}
+
+/* Titles */
+h1 {
+    text-align: center;
+    color: #222;
+    font-size: 2em;
+    margin-bottom: 22px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Inputs and Selects */
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 12px;
+    border: 1.5px solid #e4eefe;
+    border-radius: 7px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.22s;
+    background: #f8fbff;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #4facfe;
+    background: #f0f9ff;
+}
+
+button {
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(90deg, #4facfe 45%, #00f2fe 100%);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 1.14em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 14px;
+    box-shadow: 0 4px 14px rgba(79,172,254,0.15);
+    transition: background 0.15s, transform 0.14s;
+}
+button:hover {
+    opacity: 0.94;
+    background: linear-gradient(90deg, #00f2fe 40%, #4facfe 100%);
+    transform: scale(1.03);
+}
+
+.result {
+    background: #4caf50;
+    color: white;
+    padding: 15px;
+    border-radius: 7px;
+    text-align: center;
+    margin-top: 22px;
+    font-size: 1.16em;
+    font-weight: bold;
+}
+.error {
+    background: #f44336;
+    color: white;
+    padding: 15px;
+    border-radius: 7px;
+    text-align: center;
+    margin-top: 22px;
+}
+
+.formula-box {
+    background: #f5faff;
+    padding: 16px 13px 14px 17px;
+    border-radius: 9px;
+    margin-top: 22px;
+    font-size: 1em;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.formula-box h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.13em;
+}
+
+.formula-box ul {
+    list-style: none;
+    padding: 0;
+}
+.formula-box li {
+    margin: 7px 0;
+    color: #37577d;
+}
+
+.errorlist {
+    color: #f44336;
+    list-style: none;
+    padding: 0;
+    margin: 6px 0;
+    font-size: 0.98em;
+}
+
+/* 2. RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+    .container {
+        padding: 13px 2vw;
+        max-width: 97vw;
+    }
+    h1 { font-size: 1.28em; }
+    .formula-box { font-size: 0.97em; }
+    .result {font-size: 1em;}
+    .error {font-size: 1em;}
+    button {font-size: 1em;}
+}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Temperature Converter</h1>
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label>{{ form.temperature.label }}</label>
+          {{ form.temperature }} {{ form.temperature.errors }}
+        </div>
+
+        <div class="form-group">
+          <label>{{ form.from_unit.label }}</label>
+          {{ form.from_unit }}
+        </div>
+
+        <div class="form-group">
+          <label>{{ form.to_unit.label }}</label>
+          {{ form.to_unit }}
+        </div>
+
+        <button type="submit">Convert</button>
+      </form>
+
+      {% if result %}
+      <div class="result">Result: {{ result }}°</div>
+      {% endif %} {% if error %}
+      <div class="error">{{ error }}</div>
+      {% endif %}
+
+      <div class="formula-box">
+        <h3>Formulas:</h3>
+        <ul>
+          <li>C → F: F = (C × 9/5) + 32</li>
+          <li>F → C: C = (F - 32) × 5/9</li>
+          <li>C → K: K = C + 273.15</li>
+          <li>K → C: C = K - 273.15</li>
+          <li>F → K: K = (F - 32) × 5/9 + 273.15</li>
+          <li>K → F: F = (K - 273.15) × 9/5 + 32</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
