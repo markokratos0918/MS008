@@ -1,3 +1,4 @@
+"""AI Itinerary Recommender using Gemini API"""
 import os
 import sys
 import google.generativeai as genai
@@ -43,12 +44,14 @@ User Details:
 
 Based on this personal information, create a structured itinerary following these guidelines:
 
-1. For each day, provide exactly 3 activities (morning, afternoon, evening)
+1. For each day, provide maximum 3 activities (morning, afternoon, evening)
 2. Include the name of the place, complete address, and a short description
 3. Consider the user's age
 4. Make sure activities are age-appropriate and logistically feasible
 5. Format each day clearly with Day number as heading
-
+6. Reply as if you are a tour guide of a tourism agent in Auckland
+7. limits the number of probable words to 500 words
+8. 200 tokens that signal the model to stop generating output
 Present the itinerary in an organized, easy-to-read format.
 """
     try:
